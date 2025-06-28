@@ -25,7 +25,7 @@ function getSelectedSubjects() {
 }
 
 function clearForm() {
-    subjectSelect.selectedIndex = -1; // desmarca todas
+    subjectSelect.selectedIndex = -1;
     checkboxes.forEach(cb => cb.checked = false);
     startTime.value = '';
     endTime.value = '';
@@ -65,7 +65,6 @@ function addSubject() {
     if (startTime.value >= endTime.value) return alert('Horário de início deve ser antes do fim.');
 
     if (editIndex !== null) {
-        // Atualiza somente o item editado (editar uma matéria por vez)
         subjectsData[editIndex] = {
             subject: selectedSubjects[0],
             days: selectedDays,
@@ -74,7 +73,6 @@ function addSubject() {
             note: note.value
         };
     } else {
-        // Adiciona uma entrada para cada matéria selecionada
         selectedSubjects.forEach(sub => {
             subjectsData.push({
                 subject: sub,
@@ -92,7 +90,6 @@ function addSubject() {
 
 function editSubject(index) {
     const s = subjectsData[index];
-    // Marca somente a matéria do item editado
     for (let i = 0; i < subjectSelect.options.length; i++) {
         subjectSelect.options[i].selected = subjectSelect.options[i].value === s.subject;
     }
@@ -117,7 +114,6 @@ function generateTable() {
 
     const days = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'];
 
-    // Obter todos os horários únicos ordenados
     let timeSlots = new Set();
     subjectsData.forEach(s => {
         timeSlots.add(`${s.start}|${s.end}`);
@@ -128,7 +124,6 @@ function generateTable() {
         return startA.localeCompare(startB);
     });
 
-    // Criar uma estrutura para facilitar o acesso: horários -> dias -> matérias
     const tableData = {};
     timeSlots.forEach(slot => {
         tableData[slot] = {};
@@ -137,7 +132,6 @@ function generateTable() {
         });
     });
 
-    // Preencher a estrutura com as matérias correspondentes
     subjectsData.forEach(s => {
         s.days.forEach(day => {
             const key = `${s.start}|${s.end}`;
@@ -147,7 +141,6 @@ function generateTable() {
         });
     });
 
-    // Montar o HTML da tabela
     let html = '<table class="schedule-table">';
     html += '<thead><tr><th>Horário</th>';
     days.forEach(day => {
@@ -183,9 +176,7 @@ function generateTable() {
     saveButton.style.display = 'inline-block';
 }
 
-
 function saveAsImage() {
-    // Usa html2canvas para salvar imagem
     if (!window.html2canvas) {
         alert('Biblioteca html2canvas não carregada.');
         return;

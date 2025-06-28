@@ -27,6 +27,8 @@ git clone https://github.com/bytesrandomly/CronusPolo.git
 
 ---
 
+> Projeto Beta
+
 <p align="center">
   <img src="https://img.shields.io/static/v1?label=By&message=bytesrandomly&color=1f1f1f&style=for-the-badge&logo=Github" alt="Author">
 </p>
