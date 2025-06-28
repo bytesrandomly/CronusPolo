@@ -1,0 +1,347 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BASE */
+body {
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    position: fixed; /* fixo para não sobrepor o fluxo */
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    padding: 15px 0;
+    width: calc(100% - 80px); /* deixa espaço pro sidebar */
+    backdrop-filter: saturate(180%) blur(10px);
+    -webkit-backdrop-filter: saturate(180%) blur(10px);
+    font-size: 20px;
+    z-index: 10;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 100%;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 70px;
+    border-right: 1px solid #ddd;
+}
+
+.sidebar-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    font-size: 11px;
+    width: 100%;
+    padding: 12px 0;
+    transition: background 0.2s, color 0.2s;
+    position: relative;
+}
+
+.sidebar-item:hover {
+    background: #f2f5f8;
+}
+
+.sidebar-item .icon {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.sidebar-item.active {
+    background: #f2f8ff;
+    color: #0057A3;
+    border-radius: 0 8px 8px 0;
+}
+
+.sidebar-item.active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10%;
+    bottom: 10%;
+    width: 4px;
+    background: #007BFF;
+    border-radius: 4px;
+}
+
+main {
+    margin-left: 80px;
+    margin-top: 70px;
+    padding: 40px;
+    max-width: 800px;
+    width: 100%;
+}
+
+.form-container {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.form-container select,
+.form-container input[type="time"],
+.form-container input[type="text"] {
+    width: 100%;
+    padding: 8px 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.checkboxes label {
+    margin-right: 15px;
+    font-size: 13px;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+#addButton {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: #0057A3;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#addButton:hover {
+    background: #004b8c;
+}
+
+#search {
+    width: 100%;
+    padding: 8px 10px;
+    margin: 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+#subjectsList {
+    margin-bottom: 20px;
+}
+
+.subject-item {
+    background: #eef5ff;
+    border: 1px solid #cce0ff;
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.subject-item button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    background: #0057A3;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.subject-item button:hover {
+    background: #004b8c;
+}
+
+#generateButton,
+#saveButton {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+#generateButton:hover,
+#saveButton:hover {
+    background: #0069d9;
+}
+
+#result table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#result th,
+#result td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+#result th {
+    background: #0057A3;
+    color: #fff;
+}
+
+#result td {
+    background: #f9f9f9;
+}
+
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 14px;
+}
+
+.schedule-table thead {
+    background-color: #0057A3;
+    color: white;
+}
+
+.schedule-table th,
+.schedule-table td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.schedule-table tbody tr:hover {
+    background-color: #f5faff;
+}
+
+.time-cell {
+    font-weight: bold;
+    background-color: #e7f0ff;
+    width: 140px;
+}
+
+.empty-cell {
+    color: #bbb;
+    font-style: italic;
+}
+
+.subjects-cell {
+    padding: 5px 8px;
+    vertical-align: top;
+}
+
+.subject-block {
+    background: rgba(0, 91, 187, 0.15);
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    box-shadow: 0 2px 4px rgba(0, 91, 187, 0.25);
+    color: #003366;
+    font-weight: 600;
+    line-height: 1.3;
+    text-align: left;
+}
+
+.subject-block strong {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.note {
+    font-style: italic;
+    font-size: 13px;
+    color: #004080;
+    opacity: 0.8;
+    margin-left: 4px;
+}
+
+.home-icon {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 15;
+    cursor: pointer;
+}
+
+.home-icon .icon {
+    color: #0057A3;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+    h1 {
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        padding-left: 60px; /* reserva espaço pro ícone ou sidebar menor */
+    }
+
+    .sidebar {
+        width: 60px;
+        padding-top: 60px;
+    }
+
+    main {
+        margin-left: 60px;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    main {
+        margin-left: 0;
+        margin-top: 80px;
+        padding: 15px;
+        max-width: 100%;
+    }
+
+    h1 {
+        font-size: 18px;
+        padding: 10px 0;
+    }
+
+    .form-container {
+        padding: 15px;
+    }
+
+    .checkboxes label {
+        display: block;
+        margin-right: 0;
+    }
+
+    .home-icon {
+        width: 40px;
+        height: 40px;
+    }
+}

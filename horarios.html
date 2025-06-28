@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Gerador de Grade de Horários</title>
+    <link rel="stylesheet" href="styles/horas.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+          integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</head>
+<body>
+
+<div class="home-icon">
+    <a href="index.html" class="sidebar-item active">
+        <i class="fa fa-home icon" aria-hidden="true"></i>
+    </a>
+</div>
+
+<main>
+
+    <h1>Gerador de Grade de Horários</h1>
+
+
+    <div class="form-container">
+        <label>Matérias:
+            <select id="subjects" multiple size="6">
+                <option value="Matemática">Matemática</option>
+                <option value="Português">Português</option>
+                <option value="Inglês">Inglês</option>
+                <option value="Geografia">Geografia</option>
+                <option value="História">História</option>
+                <option value="Química">Química</option>
+                <option value="Biologia">Biologia</option>
+            </select>
+        </label>
+
+        <div class="checkboxes">
+            <label><input type="checkbox" value="Segunda"> Segunda</label>
+            <label><input type="checkbox" value="Terça"> Terça</label>
+            <label><input type="checkbox" value="Quarta"> Quarta</label>
+            <label><input type="checkbox" value="Quinta"> Quinta</label>
+            <label><input type="checkbox" value="Sexta"> Sexta</label>
+        </div>
+
+        <label>Início: <input type="time" id="startTime"></label>
+        <label>Fim: <input type="time" id="endTime"></label>
+
+        <label>Anotação:
+            <input type="text" id="note" placeholder="Opcional"/>
+        </label>
+
+        <button id="addButton">Adicionar Matéria</button>
+        <button id="cancelButton" style="display:none; margin-left:10px; background:#888;">Cancelar Edição</button>
+
+    </div>
+
+    <input type="text" id="search" placeholder="Buscar matéria..."/>
+
+    <div id="subjectsList"></div>
+
+    <button id="generateButton">Gerar Grade da Semana</button>
+
+    <div id="result"></div>
+    <button id="saveButton" style="display:none;">Salvar como Imagem</button>
+</main>
+
+
+<script src="script.js"></script>
+</body>
+</html>
