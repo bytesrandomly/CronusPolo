@@ -1,11 +1,11 @@
-/* RESET */
+/* === RESET === */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* BASE */
+/* === BASE === */
 body {
     font-family: Arial, sans-serif;
     background: #f9f9f9;
@@ -13,19 +13,20 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden; /* evita rolagem lateral */
 }
 
 h1 {
-    position: fixed; /* fixo para não sobrepor o fluxo */
+    position: fixed;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
-    padding: 15px 0;
-    width: calc(100% - 80px); /* deixa espaço pro sidebar */
+    padding: 1rem 0;
+    width: calc(100% - 80px);
     backdrop-filter: saturate(180%) blur(10px);
     -webkit-backdrop-filter: saturate(180%) blur(10px);
-    font-size: 20px;
+    font-size: 1.25rem;
     z-index: 10;
 }
 
@@ -49,9 +50,9 @@ h1 {
     align-items: center;
     text-decoration: none;
     color: #333;
-    font-size: 11px;
+    font-size: 0.7rem;
     width: 100%;
-    padding: 12px 0;
+    padding: 0.75rem 0;
     transition: background 0.2s, color 0.2s;
     position: relative;
 }
@@ -61,8 +62,8 @@ h1 {
 }
 
 .sidebar-item .icon {
-    font-size: 20px;
-    margin-bottom: 5px;
+    font-size: 1.25rem;
+    margin-bottom: 0.3rem;
 }
 
 .sidebar-item.active {
@@ -85,7 +86,7 @@ h1 {
 main {
     margin-left: 80px;
     margin-top: 70px;
-    padding: 40px;
+    padding: 2.5rem 2rem;
     max-width: 800px;
     width: 100%;
 }
@@ -93,44 +94,45 @@ main {
 .form-container {
     background: #fff;
     border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    margin-bottom: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
 }
 
 .form-container label {
     display: block;
-    margin-bottom: 10px;
-    font-size: 14px;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
 }
 
 .form-container select,
 .form-container input[type="time"],
 .form-container input[type="text"] {
     width: 100%;
-    padding: 8px 10px;
-    margin-top: 5px;
+    padding: 0.5rem 0.6rem;
+    margin-top: 0.3rem;
     border: 1px solid #ccc;
     border-radius: 6px;
+    font-size: 0.9rem;
 }
 
 .checkboxes label {
-    margin-right: 15px;
-    font-size: 13px;
+    margin-right: 1rem;
+    font-size: 0.8rem;
     display: inline-block;
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
 }
 
 #addButton {
     display: inline-block;
-    margin-top: 10px;
-    padding: 10px 20px;
+    margin-top: 0.7rem;
+    padding: 0.6rem 1.2rem;
     background: #0057A3;
     color: #fff;
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 0.9rem;
 }
 
 #addButton:hover {
@@ -139,34 +141,39 @@ main {
 
 #search {
     width: 100%;
-    padding: 8px 10px;
-    margin: 20px 0;
+    padding: 0.5rem 0.6rem;
+    margin: 1.2rem 0;
     border: 1px solid #ccc;
     border-radius: 6px;
+    font-size: 0.9rem;
 }
 
 #subjectsList {
-    margin-bottom: 20px;
+    margin-bottom: 1.2rem;
 }
 
 .subject-item {
     background: #eef5ff;
     border: 1px solid #cce0ff;
     border-radius: 6px;
-    padding: 10px;
-    margin-bottom: 10px;
-    font-size: 14px;
+    padding: 0.7rem;
+    margin-bottom: 0.7rem;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .subject-item button {
-    margin-left: 10px;
-    padding: 5px 10px;
+    margin-left: 0.6rem;
+    padding: 0.3rem 0.7rem;
     background: #0057A3;
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 0.75rem;
 }
 
 .subject-item button:hover {
@@ -176,14 +183,14 @@ main {
 #generateButton,
 #saveButton {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 0.6rem 1.2rem;
     background: #007BFF;
     color: #fff;
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 14px;
-    margin-right: 10px;
+    font-size: 0.9rem;
+    margin-right: 0.6rem;
 }
 
 #generateButton:hover,
@@ -194,13 +201,13 @@ main {
 #result table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 1.2rem;
 }
 
 #result th,
 #result td {
     border: 1px solid #ccc;
-    padding: 10px;
+    padding: 0.7rem;
     text-align: center;
 }
 
@@ -216,12 +223,12 @@ main {
 .schedule-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-top: 0.7rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     background: #fff;
     border-radius: 8px;
     overflow: hidden;
-    font-size: 14px;
+    font-size: 0.9rem;
 }
 
 .schedule-table thead {
@@ -231,7 +238,7 @@ main {
 
 .schedule-table th,
 .schedule-table td {
-    padding: 12px 15px;
+    padding: 0.7rem 1rem;
     text-align: center;
     border-bottom: 1px solid #ddd;
 }
@@ -243,7 +250,7 @@ main {
 .time-cell {
     font-weight: bold;
     background-color: #e7f0ff;
-    width: 140px;
+    width: 8.75rem; /* 140px */
 }
 
 .empty-cell {
@@ -252,15 +259,15 @@ main {
 }
 
 .subjects-cell {
-    padding: 5px 8px;
+    padding: 0.3rem 0.5rem;
     vertical-align: top;
 }
 
 .subject-block {
     background: rgba(0, 91, 187, 0.15);
     border-radius: 6px;
-    padding: 8px 12px;
-    margin-bottom: 6px;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 0.4rem;
     box-shadow: 0 2px 4px rgba(0, 91, 187, 0.25);
     color: #003366;
     font-weight: 600;
@@ -270,23 +277,23 @@ main {
 
 .subject-block strong {
     display: block;
-    margin-bottom: 4px;
+    margin-bottom: 0.2rem;
 }
 
 .note {
     font-style: italic;
-    font-size: 13px;
+    font-size: 0.8rem;
     color: #004080;
     opacity: 0.8;
-    margin-left: 4px;
+    margin-left: 0.2rem;
 }
 
 .home-icon {
     position: fixed;
     top: 0;
     left: 0;
-    width: 50px;
-    height: 50px;
+    width: 3rem;
+    height: 3rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -298,50 +305,59 @@ main {
     color: #0057A3;
 }
 
-/* RESPONSIVIDADE */
-@media (max-width: 768px) {
-    h1 {
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        padding-left: 60px; /* reserva espaço pro ícone ou sidebar menor */
-    }
+/* === RESPONSIVE BREAKPOINTS === */
 
+/* Tablets: ajuste padding e largura */
+@media (max-width: 1024px) {
+    main {
+        padding: 2rem 1rem;
+    }
+}
+
+/* Celulares: sidebar colapsa */
+@media (max-width: 768px) {
     .sidebar {
         width: 60px;
-        padding-top: 60px;
+    }
+
+    h1 {
+        width: calc(100% - 60px);
+        font-size: 1rem;
+        padding: 0.8rem 0;
     }
 
     main {
         margin-left: 60px;
-        padding: 20px;
+        padding: 1.5rem 1rem;
+    }
+
+    .sidebar-item {
+        font-size: 0.65rem;
+    }
+
+    .sidebar-item .icon {
+        font-size: 1rem;
     }
 }
 
+/* Telas muito pequenas: pilhar itens */
 @media (max-width: 480px) {
-    main {
-        margin-left: 0;
-        margin-top: 80px;
-        padding: 15px;
-        max-width: 100%;
+    .subject-item {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
-    h1 {
-        font-size: 18px;
-        padding: 10px 0;
+    .subject-item button {
+        margin: 0.5rem 0 0;
     }
 
-    .form-container {
-        padding: 15px;
+    .schedule-table th,
+    .schedule-table td {
+        padding: 0.5rem;
+        font-size: 0.8rem;
     }
 
-    .checkboxes label {
-        display: block;
-        margin-right: 0;
-    }
-
-    .home-icon {
-        width: 40px;
-        height: 40px;
+    .time-cell {
+        width: auto;
     }
 }
