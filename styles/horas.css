@@ -305,16 +305,12 @@ main {
     color: #0057A3;
 }
 
-/* === RESPONSIVE BREAKPOINTS === */
-
-/* Tablets: ajuste padding e largura */
 @media (max-width: 1024px) {
     main {
         padding: 2rem 1rem;
     }
 }
 
-/* Celulares: sidebar colapsa */
 @media (max-width: 768px) {
     .sidebar {
         width: 60px;
@@ -340,7 +336,6 @@ main {
     }
 }
 
-/* Telas muito pequenas: pilhar itens */
 @media (max-width: 480px) {
     .subject-item {
         flex-direction: column;
