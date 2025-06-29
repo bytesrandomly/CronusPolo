@@ -5,7 +5,6 @@
     box-sizing: border-box;
 }
 
-/* BASE */
 body {
     font-family: Arial, sans-serif;
     background: #f9f9f9;
@@ -14,7 +13,6 @@ body {
     min-height: 100vh;
 }
 
-/* HEADER */
 header {
     position: fixed;
     top: 0;
@@ -31,12 +29,11 @@ header {
     -webkit-backdrop-filter: saturate(180%) blur(10px);
 }
 
-/* NAV LINKS */
 .nav-links {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    gap: 20px; /* reduzi o gap pra caber melhor em telas menores */
+    gap: 20px;
     justify-content: center;
 }
 
@@ -55,13 +52,6 @@ header {
     border-bottom: 2px solid #0057A3;
 }
 
-/* USER ICON */
-.user-icon {
-    font-size: 12px;
-    color: #ffffff;
-}
-
-/* SIDEBAR */
 .sidebar {
     position: fixed;
     top: 0;
@@ -116,7 +106,6 @@ header {
     border-radius: 4px;
 }
 
-/* MAIN CONTENT */
 main {
     margin-left: 80px;
     margin-top: 70px;
@@ -134,7 +123,7 @@ main {
 .intro-left img {
     width: 100%;
     max-width: 300px;
-    height: auto; /* garante proporção correta */
+    height: auto;
     border-radius: 8px;
 }
 
@@ -163,7 +152,7 @@ main {
     display: flex;
     gap: 30px;
     flex-wrap: wrap;
-    justify-content: center; /* centraliza quando quebrar */
+    justify-content: center;
 }
 
 .card {
@@ -198,13 +187,16 @@ main {
 }
 
 .card-image {
-    object-fit: contain;
-    margin-bottom: 10px;
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    object-position: center;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    width: 100%; /* garante que a imagem responda bem */
-    height: auto;
+    display: block;
+    margin-bottom: 12px;
 }
+
 
 .brief-desc {
     margin-top: 10px;
@@ -223,10 +215,9 @@ h2.highlighted {
     margin-bottom: 20px;
 }
 
-/* MEDIA QUERIES PARA GARANTIR RESPONSIVIDADE */
 @media (max-width: 768px) {
     header {
-        left: 0; /* sidebar pode ser colapsada em telas pequenas */
+        left: 0;
         padding: 10px;
     }
 
