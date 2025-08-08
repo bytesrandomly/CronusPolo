@@ -1,0 +1,292 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #121212;
+    color: #ddd;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(18, 18, 18, 0.85);
+    padding: 10px 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.7);
+    backdrop-filter: saturate(180%) blur(10px);
+    -webkit-backdrop-filter: saturate(180%) blur(10px);
+    z-index: 100;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #bbb;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    padding-bottom: 5px;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: #1E90FF;
+    border-bottom: 2px solid #1E90FF;
+}
+
+main {
+    margin-top: 60px;
+    padding: 40px 20px;
+    flex: 1;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.anuncios-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.anuncio {
+    background: #222;
+    border-radius: 10px;
+    padding: 25px 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.7);
+    transition: background 0.3s ease;
+}
+
+.anuncio:hover {
+    background: #1E2A47;
+}
+
+.titulo {
+    color: #1E90FF;
+    font-size: 20px;
+    margin-bottom: 6px;
+}
+
+.subtitulo {
+    color: #bbb;
+    font-size: 16px;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.descricao {
+    font-size: 14px;
+    color: #ccc;
+    line-height: 1.5;
+    margin-bottom: 18px;
+}
+
+.localizacao {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #1E90FF;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.localizacao i {
+    font-size: 18px;
+}
+
+/* Formulário */
+
+.anuncio-form-section {
+    background: #222;
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.7);
+    margin-top: 50px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #ddd;
+}
+
+.anuncio-form-section h2 {
+    color: #1E90FF;
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+.anuncio-form-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.anuncio-form-section label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #bbb;
+}
+
+.anuncio-form-section input[type="text"],
+.anuncio-form-section textarea {
+    background: #121212;
+    border: 1.5px solid #444;
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: #ddd;
+    font-size: 14px;
+    resize: vertical;
+    transition: border-color 0.3s ease;
+}
+
+.anuncio-form-section input[type="text"]:focus,
+.anuncio-form-section textarea:focus {
+    outline: none;
+    border-color: #1E90FF;
+}
+
+.anuncio-form-section button {
+    background: #1E90FF;
+    border: none;
+    padding: 12px;
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.anuncio-form-section button:hover {
+    background: #1564bf;
+}
+
+/* ... (todo o CSS que você já tinha) ... */
+
+/* Botão apagar */
+.btn-apagar {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: transparent;
+    border: none;
+    color: #ff5555;
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.btn-apagar:hover {
+    color: #ff0000;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 100%;
+    background: #181818;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 70px;
+    border-right: 1px solid #333;
+    z-index: 11;
+}
+
+.sidebar-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #bbb;
+    font-size: 0.7rem;
+    width: 100%;
+    padding: 0.75rem 0;
+    transition: background 0.2s, color 0.2s;
+    position: relative;
+}
+
+.sidebar-item:hover {
+    background: #222;
+    color: #1E90FF;
+}
+
+.sidebar-item .icon {
+    font-size: 1.25rem;
+    margin-bottom: 0.3rem;
+}
+
+.sidebar-item.active {
+    background: #1E2A47;
+    color: #1E90FF;
+    border-radius: 0 8px 8px 0;
+}
+
+.sidebar-item.active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10%;
+    bottom: 10%;
+    width: 4px;
+    background: #1E90FF;
+    border-radius: 4px;
+}
+
+/* Ajusta o artigo para posição relativa para o botão apagar */
+.anuncio {
+    position: relative;
+}
+
+/* Botão adicionar */
+.btn-adicionar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* Ícones no título do formulário */
+.anuncio-form-section h2 i {
+    margin-right: 8px;
+    color: #1E90FF;
+}
+
+
+/* Responsivo */
+
+@media (max-width: 600px) {
+    main {
+        padding: 20px 10px;
+    }
+
+    .anuncio {
+        padding: 20px 15px;
+    }
+
+    .titulo {
+        font-size: 18px;
+    }
+
+    .subtitulo {
+        font-size: 14px;
+    }
+}

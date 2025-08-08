@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerador de Grade de Horários</title>
     <link rel="stylesheet" href="styles/horas.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -11,15 +12,27 @@
 </head>
 <body>
 
-<div class="home-icon">
+<aside class="sidebar">
     <a href="index.html" class="sidebar-item active">
         <i class="fa fa-home icon" aria-hidden="true"></i>
+        <span>Home</span>
     </a>
-</div>
+    <a href="horarios.html" class="sidebar-item">
+        <i class="fa fa-bullhorn" aria-hidden="true"></i>
+        <span>Anúncios</span>
+    </a>
+    <a href="https://www.instagram.com" target="_blank" class="sidebar-item">
+        <i class="fab fa-instagram icon"></i>
+        <span>Instagram</span>
+    </a>
+</aside>
+
+<header>
+    <h1>Gerador de Grade de Horários</h1>
+</header>
 
 <main>
 
-    <h1>Gerador de Grade de Horários</h1>
 
 
     <div class="form-container">
@@ -66,6 +79,6 @@
 </main>
 
 
-<script src="script.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>
