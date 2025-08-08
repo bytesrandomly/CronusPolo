@@ -268,22 +268,67 @@ main {
 }
 
 
-/* Responsivo */
-
-@media (max-width: 600px) {
+/* HD (1280px ou menos) */
+@media (max-width: 1280px) {
     main {
-        padding: 20px 10px;
+        padding: 30px 15px;
+        max-width: 95%;
     }
-
-    .anuncio {
-        padding: 20px 15px;
-    }
-
-    .titulo {
-        font-size: 18px;
-    }
-
-    .subtitulo {
-        font-size: 14px;
+    .nav-links {
+        gap: 20px;
     }
 }
+
+/* Tablets e telas médias (até 1024px) */
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 60px;
+    }
+    .sidebar-item span {
+        display: none; /* Esconde texto, deixa só ícone */
+    }
+    .nav-links {
+        gap: 15px;
+    }
+}
+
+/* Smartphones grandes (até 768px) */
+@media (max-width: 768px) {
+    header {
+        padding: 8px 12px;
+    }
+    .nav-links {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    main {
+        padding: 20px;
+        margin-top: 70px;
+    }
+    .anuncio {
+        padding: 18px;
+    }
+}
+
+/* Smartphones pequenos (até 480px) */
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+    .titulo {
+        font-size: 16px;
+    }
+    .subtitulo {
+        font-size: 13px;
+    }
+    .descricao {
+        font-size: 13px;
+    }
+    .sidebar {
+        display: none; /* Oculta barra lateral se muito pequena */
+    }
+    .anuncio-form-section {
+        padding: 15px;
+    }
+}
+
