@@ -1,25 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerador de Grade de Horários</title>
-    <link rel="stylesheet" href="styles/horas.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-          integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anúncios do Polo</title>
+    <link rel="stylesheet" href="styles/anuncios.css" />
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+            integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+    />
 </head>
 <body>
 
+<!-- Sidebar -->
 <aside class="sidebar">
     <a href="index.html" class="sidebar-item active">
         <i class="fa fa-home icon" aria-hidden="true"></i>
         <span>Home</span>
     </a>
     <a href="horarios.html" class="sidebar-item">
-        <i class="fa fa-bullhorn" aria-hidden="true"></i>
-        <span>Anúncios</span>
+        <i class="fa fa-hourglass icon"></i>
+        <span>Gere Horarios</span>
     </a>
     <a href="https://www.instagram.com" target="_blank" class="sidebar-item">
         <i class="fab fa-instagram icon"></i>
@@ -27,58 +31,33 @@
     </a>
 </aside>
 
-<header>
-    <h1>Gerador de Grade de Horários</h1>
-</header>
-
 <main>
+    <section class="anuncios-container">
+        <!-- anúncios vão ser inseridos aqui via JS -->
+    </section>
 
+    <section class="anuncio-form-section">
+        <h2><i class="fa-solid fa-plus"></i> Adicionar Novo Anúncio</h2>
+        <form id="formAnuncio">
+            <label for="titulo">Título:</label>
+            <input type="text" id="titulo" name="titulo" required />
 
+            <label for="subtitulo">Subtítulo:</label>
+            <input type="text" id="subtitulo" name="subtitulo" required />
 
-    <div class="form-container">
-        <label>Matérias:
-            <select id="subjects" multiple size="6">
-                <option value="Matemática">Matemática</option>
-                <option value="Português">Português</option>
-                <option value="Inglês">Inglês</option>
-                <option value="Geografia">Geografia</option>
-                <option value="História">História</option>
-                <option value="Química">Química</option>
-                <option value="Biologia">Biologia</option>
-            </select>
-        </label>
+            <label for="descricao">Descrição:</label>
+            <textarea id="descricao" name="descricao" rows="4" required></textarea>
 
-        <div class="checkboxes">
-            <label><input type="checkbox" value="Segunda"> Segunda</label>
-            <label><input type="checkbox" value="Terça"> Terça</label>
-            <label><input type="checkbox" value="Quarta"> Quarta</label>
-            <label><input type="checkbox" value="Quinta"> Quinta</label>
-            <label><input type="checkbox" value="Sexta"> Sexta</label>
-        </div>
+            <label for="localizacao">Localização:</label>
+            <input type="text" id="localizacao" name="localizacao" required />
 
-        <label>Início: <input type="time" id="startTime"></label>
-        <label>Fim: <input type="time" id="endTime"></label>
-
-        <label>Anotação:
-            <input type="text" id="note" placeholder="Opcional"/>
-        </label>
-
-        <button id="addButton">Adicionar Matéria</button>
-        <button id="cancelButton" style="display:none; margin-left:10px; background:#888;">Cancelar Edição</button>
-
-    </div>
-
-    <input type="text" id="search" placeholder="Buscar matéria..."/>
-
-    <div id="subjectsList"></div>
-
-    <button id="generateButton">Gerar Grade da Semana</button>
-
-    <div id="result"></div>
-    <button id="saveButton" style="display:none;">Salvar como Imagem</button>
+            <button type="submit" class="btn-adicionar">
+                <i class="fa-solid fa-plus"></i> Adicionar Anúncio
+            </button>
+        </form>
+    </section>
 </main>
 
-
-<script src="js/script.js"></script>
+<script src="js/anucions.js"></script>
 </body>
 </html>
