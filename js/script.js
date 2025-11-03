@@ -24,40 +24,64 @@ const horarios = [
   { label: "Aula 9: 15:40 — 16:30", start: "15:40", end: "16:30" }
 ];
 
-function getSelectedDays() {
-  return Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.value);
+/* === FUNÇÕES AUXILIARES === */
+const getSelectedDays = () =>
+  Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.value);
+
+const getSelectedSubjects = () =>
+  Array.from(subjectSelect.selectedOptions).map(opt => opt.value);
+
+function createOption(value, text = value) {
+  const opt = document.createElement('option');
+  opt.value = value;
+  opt.textContent = text;
+  return opt;
 }
 
-function getSelectedSubjects() {
-  return Array.from(subjectSelect.selectedOptions).map(opt => opt.value);
+/* === GESTÃO DE MATÉRIAS PERSONALIZADAS === */
+function addNewSubject() {
+  const newName = prompt('Digite o nome da nova matéria:');
+  if (!newName) return;
+  const exists = Array.from(subjectSelect.options).some(opt => opt.value.toLowerCase() === newName.toLowerCase());
+  if (exists) return alert('Essa matéria já existe.');
+
+  const opt = createOption(newName);
+  opt.dataset.custom = "true"; // Marca como personalizada
+  subjectSelect.appendChild(opt);
+  subjectSelect.value = newName;
 }
 
-function renderSubjects() {
-  subjectsList.innerHTML = '';
-  const filter = search.value.toLowerCase();
-  const filtered = subjectsData.filter(s => s.subject.toLowerCase().includes(filter));
+function editSubject() {
+  const selected = getSelectedSubjects()[0];
+  if (!selected) return alert('Selecione uma matéria para editar.');
 
-  if (filtered.length === 0) {
-    subjectsList.textContent = 'Nenhuma matéria adicionada.';
-    return;
-  }
+  const opt = Array.from(subjectSelect.options).find(opt => opt.value === selected);
+  if (!opt.dataset.custom) return alert('Matérias pré-definidas não podem ser editadas.');
 
-  filtered.forEach((s, index) => {
-    const div = document.createElement('div');
-    div.className = 'subject-item';
-    div.innerHTML = `<strong>${s.subject}</strong> | ${s.days.join(', ')} | ${s.start} - ${s.end} | ${s.note || ''}
-      <button onclick="deleteSubject(${index})">Excluir</button>`;
-    subjectsList.appendChild(div);
-  });
+  const newName = prompt('Novo nome para a matéria:', selected);
+  if (!newName) return;
+  const exists = Array.from(subjectSelect.options).some(o => o.value.toLowerCase() === newName.toLowerCase());
+  if (exists && newName !== selected) return alert('Esse nome já existe.');
+
+  opt.value = newName;
+  opt.textContent = newName;
 }
 
-function deleteSubject(index) {
-  if (confirm('Tem certeza?')) {
-    subjectsData.splice(index, 1);
-    renderSubjects();
-  }
+function deleteSubjectFromList() {
+  const selected = getSelectedSubjects()[0];
+  if (!selected) return alert('Selecione uma matéria para excluir.');
+
+  const opt = Array.from(subjectSelect.options).find(opt => opt.value === selected);
+  if (!opt.dataset.custom) return alert('Matérias pré-definidas não podem ser excluídas.');
+
+  if (!confirm(`Excluir matéria "${selected}"?`)) return;
+  opt.remove();
+
+  subjectsData = subjectsData.filter(s => s.subject !== selected);
+  renderSubjects();
 }
 
+/* === GERADOR DE HORÁRIOS === */
 function createSubjectRow(subjectName) {
   const div = document.createElement('div');
   div.className = 'subject-item';
@@ -89,8 +113,8 @@ function generateScheduleSelectors() {
   const selectedSubjects = getSelectedSubjects();
   const selectedDays = getSelectedDays();
 
-  if (selectedSubjects.length === 0) return alert('Selecione pelo menos uma matéria.');
-  if (selectedDays.length === 0) return alert('Selecione pelo menos um dia.');
+  if (!selectedSubjects.length) return alert('Selecione pelo menos uma matéria.');
+  if (!selectedDays.length) return alert('Selecione pelo menos um dia.');
 
   subjectTimesContainer.innerHTML = '';
   subjectTimesContainer.style.display = 'block';
@@ -105,37 +129,57 @@ function generateScheduleSelectors() {
 
 function addSubjectsToList() {
   const selectedDays = getSelectedDays();
-  const timeSelectors = subjectTimesContainer.querySelectorAll('.timeSelect');
-  const noteInputs = subjectTimesContainer.querySelectorAll('.noteInput');
-  const subjects = subjectTimesContainer.querySelectorAll('.subject-item');
+  const items = subjectTimesContainer.querySelectorAll('.subject-item');
 
-  subjects.forEach((div, i) => {
+  items.forEach(div => {
     const subject = div.dataset.subject;
-    const [start, end] = timeSelectors[i].value.split('|');
-    const note = noteInputs[i].value;
-
+    const [start, end] = div.querySelector('.timeSelect').value.split('|');
+    const note = div.querySelector('.noteInput').value;
     subjectsData.push({ subject, days: selectedDays, start, end, note });
   });
 
-  subjectTimesContainer.style.display = 'none';
-  addButton.style.display = 'none';
-  cancelButton.style.display = 'none';
+  cancelSelection();
   renderSubjects();
 }
 
 function cancelSelection() {
+  subjectTimesContainer.innerHTML = '';
   subjectTimesContainer.style.display = 'none';
   addButton.style.display = 'none';
   cancelButton.style.display = 'none';
 }
 
+function renderSubjects() {
+  subjectsList.innerHTML = '';
+  const filter = search.value.toLowerCase();
+  const filtered = subjectsData.filter(s => s.subject.toLowerCase().includes(filter));
+
+  if (!filtered.length) {
+    subjectsList.textContent = 'Nenhuma matéria adicionada.';
+    return;
+  }
+
+  filtered.forEach((s, index) => {
+    const div = document.createElement('div');
+    div.className = 'subject-item';
+    div.innerHTML = `
+      <strong>${s.subject}</strong> | ${s.days.join(', ')} | ${s.start} - ${s.end} | ${s.note || ''}
+      <button onclick="deleteSubject(${index})">Excluir</button>`;
+    subjectsList.appendChild(div);
+  });
+}
+
+function deleteSubject(index) {
+  if (!confirm('Tem certeza?')) return;
+  subjectsData.splice(index, 1);
+  renderSubjects();
+}
+
 function generateTable() {
-  if (subjectsData.length === 0) return alert('Adicione pelo menos uma matéria.');
+  if (!subjectsData.length) return alert('Adicione pelo menos uma matéria.');
 
   const days = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'];
-
-  let timeSlots = new Set(subjectsData.map(s => `${s.start}|${s.end}`));
-  timeSlots = Array.from(timeSlots).sort((a, b) => a.localeCompare(b));
+  const timeSlots = [...new Set(subjectsData.map(s => `${s.start}|${s.end}`))].sort();
 
   const tableData = {};
   timeSlots.forEach(slot => {
@@ -146,32 +190,26 @@ function generateTable() {
   subjectsData.forEach(s => {
     s.days.forEach(day => {
       const key = `${s.start}|${s.end}`;
-      if (tableData[key] && tableData[key][day]) {
-        tableData[key][day].push({ subject: s.subject, note: s.note });
-      }
+      tableData[key][day]?.push({ subject: s.subject, note: s.note });
     });
   });
 
-  let html = '<table class="schedule-table">';
-  html += '<thead><tr><th>Horário</th>';
-  days.forEach(day => (html += `<th>${day}</th>`));
-  html += '</tr></thead><tbody>';
+  let html = `
+    <table class="schedule-table">
+      <thead>
+        <tr><th>Horário</th>${days.map(d => `<th>${d}</th>`).join('')}</tr>
+      </thead><tbody>
+  `;
 
   timeSlots.forEach(slot => {
     const [start, end] = slot.split('|');
-    html += `<tr><td class="time-cell"><strong>${start} até ${end}</strong></td>`;
-
+    html += `<tr><td class="time-cell"><strong>${start} - ${end}</strong></td>`;
     days.forEach(day => {
       const subjects = tableData[slot][day];
-      html += '<td>';
-      if (subjects.length === 0) {
-        html += '-';
-      } else {
-        subjects.forEach(s => {
-          html += `<div class="subject-block"><strong>${s.subject}</strong>${s.note ? `<br><em>${s.note}</em>` : ''}</div>`;
-        });
-      }
-      html += '</td>';
+      html += `<td>${subjects.length ? subjects.map(s => `
+        <div class="subject-block">
+          <strong>${s.subject}</strong>${s.note ? `<br><em>${s.note}</em>` : ''}
+        </div>`).join('') : '-'}</td>`;
     });
     html += '</tr>';
   });
@@ -190,12 +228,26 @@ function saveAsImage() {
   });
 }
 
-// Event listeners
+/* === EVENTOS === */
 selectTimesButton.onclick = generateScheduleSelectors;
 addButton.onclick = addSubjectsToList;
 cancelButton.onclick = cancelSelection;
 generateButton.onclick = generateTable;
 saveButton.onclick = saveAsImage;
 search.oninput = renderSubjects;
+
+/* === BOTÕES DE GESTÃO DE MATÉRIAS === */
+const controlsDiv = document.createElement('div');
+controlsDiv.style.marginTop = '0.8rem';
+controlsDiv.innerHTML = `
+  <button id="newSubjectBtn" class="mini-btn">Nova Matéria</button>
+  <button id="editSubjectBtn" class="mini-btn">Editar</button>
+  <button id="deleteSubjectBtn" class="mini-btn">Excluir</button>
+`;
+subjectSelect.insertAdjacentElement('afterend', controlsDiv);
+
+document.getElementById('newSubjectBtn').onclick = addNewSubject;
+document.getElementById('editSubjectBtn').onclick = editSubject;
+document.getElementById('deleteSubjectBtn').onclick = deleteSubjectFromList;
 
 renderSubjects();
