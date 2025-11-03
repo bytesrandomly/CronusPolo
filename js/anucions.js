@@ -16,7 +16,7 @@ function carregarAnuncios() {
 }
 
 function criaAnuncioElemento(anuncioObj) {
-    const { titulo, subtitulo, descricao, localizacao, id } = anuncioObj;
+    const { titulo, subtitulo, descricao, localizacao, horarios, id } = anuncioObj;
     const article = document.createElement("article");
     article.classList.add("anuncio");
     article.dataset.id = id;
@@ -28,6 +28,11 @@ function criaAnuncioElemento(anuncioObj) {
     <div class="localizacao">
       <i class="fa-solid fa-location-dot"></i>
       <span>${localizacao}</span>
+    </div>
+
+    <div class="horarios">
+    <i class="fa-solid fa-calendar"></i>
+    <span>${horarios}</span>
     </div>
     <button class="btn-apagar" title="Apagar anúncio">
       <i class="fa-solid fa-trash"></i>
@@ -68,24 +73,40 @@ form.addEventListener("submit", (e) => {
     const subtitulo = form.subtitulo.value.trim();
     const descricao = form.descricao.value.trim();
     const localizacao = form.localizacao.value.trim();
+    const horarioInput = form.horarios.value;
 
-    if (!titulo || !subtitulo || !descricao || !localizacao) {
+    if (!titulo || !subtitulo || !descricao || !localizacao || !horarioInput) {
         alert("Por favor, preencha todos os campos!");
         return;
     }
 
-    // Criar ID único simples
+    // Converter formato ISO para DD/MM, HHhMMmin
+    const data = new Date(horarioInput);
+    const dia = String(data.getDate()).padStart(2, "0");
+    const mes = String(data.getMonth() + 1).padStart(2, "0");
+    const horas = String(data.getHours()).padStart(2, "0");
+    const minutos = String(data.getMinutes()).padStart(2, "0");
+    const horarioFormatado = `${dia}/${mes}, ${horas}h${minutos}min`;
+
     const id = Date.now().toString();
 
-    const novoAnuncio = { id, titulo, subtitulo, descricao, localizacao };
+    const novoAnuncio = {
+        id,
+        titulo,
+        subtitulo,
+        descricao,
+        localizacao,
+        horarios: horarioFormatado
+    };
 
     const anuncios = carregarAnuncios();
-    anuncios.unshift(novoAnuncio); // adiciona no início
+    anuncios.unshift(novoAnuncio);
 
     salvarAnuncios(anuncios);
     renderizarAnuncios();
     form.reset();
 });
+
 
 // Carrega e exibe os anúncios no carregamento da página
 renderizarAnuncios();
