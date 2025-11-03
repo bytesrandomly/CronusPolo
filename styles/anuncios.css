@@ -107,7 +107,22 @@ main {
     font-size: 14px;
 }
 
+
 .localizacao i {
+    font-size: 18px;
+}
+
+.horarios {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #1E90FF;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+
+.horarios i {
     font-size: 18px;
 }
 
@@ -144,6 +159,7 @@ main {
 }
 
 .anuncio-form-section input[type="text"],
+.anuncio-form-section input[type="number"],
 .anuncio-form-section textarea {
     background: #121212;
     border: 1.5px solid #444;
@@ -156,6 +172,7 @@ main {
 }
 
 .anuncio-form-section input[type="text"]:focus,
+.anuncio-form-section input[type="number"]:focus,
 .anuncio-form-section textarea:focus {
     outline: none;
     border-color: #1E90FF;
@@ -175,6 +192,22 @@ main {
 
 .anuncio-form-section button:hover {
     background: #1564bf;
+}
+
+.anuncio-form-section input[type="datetime-local"] {
+    background: #121212;
+    border: 1.5px solid #444;
+    border-radius: 6px;
+    padding: 8px 12px;
+    color-scheme: dark; 
+    color: #ddd;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.anuncio-form-section input[type="datetime-local"]:focus {
+    outline: none;
+    border-color: #1E90FF;
 }
 
 /* Botão apagar */
