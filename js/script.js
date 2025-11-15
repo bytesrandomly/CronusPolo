@@ -24,7 +24,6 @@ const horarios = [
   { label: "Aula 9: 15:40 — 16:30", start: "15:40", end: "16:30" }
 ];
 
-/* === FUNÇÕES AUXILIARES === */
 const getSelectedDays = () =>
   Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.value);
 
@@ -38,7 +37,6 @@ function createOption(value, text = value) {
   return opt;
 }
 
-/* === GESTÃO DE MATÉRIAS PERSONALIZADAS === */
 function addNewSubject() {
   const newName = prompt('Digite o nome da nova matéria:');
   if (!newName) return;
@@ -46,7 +44,7 @@ function addNewSubject() {
   if (exists) return alert('Essa matéria já existe.');
 
   const opt = createOption(newName);
-  opt.dataset.custom = "true"; // Marca como personalizada
+  opt.dataset.custom = "true"; 
   subjectSelect.appendChild(opt);
   subjectSelect.value = newName;
 }
@@ -81,7 +79,6 @@ function deleteSubjectFromList() {
   renderSubjects();
 }
 
-/* === GERADOR DE HORÁRIOS === */
 function createSubjectRow(subjectName) {
   const div = document.createElement('div');
   div.className = 'subject-item';
@@ -228,7 +225,6 @@ function saveAsImage() {
   });
 }
 
-/* === EVENTOS === */
 selectTimesButton.onclick = generateScheduleSelectors;
 addButton.onclick = addSubjectsToList;
 cancelButton.onclick = cancelSelection;
@@ -236,7 +232,6 @@ generateButton.onclick = generateTable;
 saveButton.onclick = saveAsImage;
 search.oninput = renderSubjects;
 
-/* === BOTÕES DE GESTÃO DE MATÉRIAS === */
 const controlsDiv = document.createElement('div');
 controlsDiv.style.marginTop = '0.8rem';
 controlsDiv.innerHTML = `
